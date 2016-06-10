@@ -20,12 +20,15 @@ docker run -it --rm \
   scottbrown/shellcheck "*.sh"
 ```
 
-That's a lot to type.  Instead of wrecking your fingers, make a script
-called `shellcheck` that sits on your `PATH` so you can simply type
-`shellcheck` within any directory you want to test your shell scripts.
+That's a lot to type.  Instead of wrecking your fingers, make a shell
+alias so you can simply type shellcheck within any directory you want
+to test your shell scripts.
 
 ```
 # in ~/.bashrc
 alias shellcheck='docker run -it --rm -v "$(pwd)":"/host/${PWD##*/}" -w "/host/${PWD##*/}" --name=shellcheck scottbrown/shellcheck "$@"'
 ```
+
+Now you can do `shellcheck test.sh` and it will check your shell script.
+Awesome sauce!
 
