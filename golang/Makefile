@@ -17,13 +17,13 @@ deps:  ## ensures required project binaries and libs are installed
 		(echo "Install docker to continue"; exit 1)
 
 image:  ## build a new Docker image from this project
-	docker build -t $(IMAGE_NAME) .
+	$(DOCKER_BIN) build -t $(IMAGE_NAME) .
 
 tag:  ## tag the Docker image by commit and "latest"
-	docker tag $(IMAGE_NAME) $(NAMESPACE)/$(IMAGE_NAME):$(GO_VERSION)
-	docker tag $(IMAGE_NAME) $(NAMESPACE)/$(IMAGE_NAME):latest
+	$(DOCKER_BIN) tag $(IMAGE_NAME) $(NAMESPACE)/$(IMAGE_NAME):$(GO_VERSION)
+	$(DOCKER_BIN) tag $(IMAGE_NAME) $(NAMESPACE)/$(IMAGE_NAME):latest
 
 release: tag  ## push the Docker image to Docker Hub
-	docker push $(NAMESPACE)/$(IMAGE_NAME):latest
-	docker push $(NAMESPACE)/$(IMAGE_NAME):$(GO_VERSION)
+	$(DOCKER_BIN) push $(NAMESPACE)/$(IMAGE_NAME):latest
+	$(DOCKER_BIN) push $(NAMESPACE)/$(IMAGE_NAME):$(GO_VERSION)
 
